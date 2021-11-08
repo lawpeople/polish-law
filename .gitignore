@@ -1,0 +1,21 @@
+# IDE files
+.idea/
+.vscode/
+
+# Raw OCR data
+raw/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Test files
+.pytest_cache/
+
+# virtualenv
+.venv/
+venv/
+
+# osx
+*.DS_Store
