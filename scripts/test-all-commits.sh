@@ -1,0 +1,1 @@
+GIT_SEQUENCE_EDITOR=: git rebase -i --exec "source venv/bin/activate && pytest -vvs tests" $(git rev-list --reverse HEAD | head -n 1)
