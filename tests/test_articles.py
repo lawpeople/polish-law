@@ -1,6 +1,6 @@
-from typing import Generator
 import pathlib
 import re
+from typing import Generator
 
 import pytest
 
