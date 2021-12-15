@@ -1,10 +1,6 @@
-import pathlib
 import re
-from typing import Generator
 
 import pytest
-
-BASE_DIRS = ["data/Królestwo", "data/IIRP"]
 
 LEGAL_ARTICLE_NO_PATTERN: re.Pattern[str] = re.compile(r"Art\. (\d+)\.")
 LEGAL_ARTICLE_PATTERN: re.Pattern[str] = re.compile(
@@ -15,22 +11,6 @@ LEGAL_ARTICLE_PATTERN: re.Pattern[str] = re.compile(
 def is_roman_numeric(text: str) -> bool:
     # Very naive check, however there is no need to validate
     return set(text).issubset(set("IVXLCDM"))
-
-
-def _gather_legal_act_file_paths():
-    root_path = pathlib.Path(".")
-
-    for base_dir in BASE_DIRS:
-        legal_acts_path = root_path / base_dir
-        for file_path in legal_acts_path.glob("**/*.md"):
-            yield pytest.param(file_path, id=file_path.name)
-
-
-@pytest.fixture(scope="session", params=_gather_legal_act_file_paths())
-def legal_act(request: pytest.FixtureRequest) -> Generator[str, None, None]:
-    with open(request.param) as f:
-        content = f.read()
-    yield content
 
 
 def test_articles_correct_count_and_order(legal_act: str):
