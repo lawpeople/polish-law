@@ -2,7 +2,7 @@ import pathlib
 
 from pygit2 import Repository
 
-from liblegis.backends.base import Backend, LegalActDataResult
+from liblegis.backends.base import Backend, LegalAct
 
 
 class LocalGitBackend(Backend):
@@ -10,13 +10,13 @@ class LocalGitBackend(Backend):
         self._index = None
         self._repo = Repository("data/.git")
 
-    def get_legal_act_data(self, year: int, position: int) -> LegalActDataResult:
+    def _get_legal_act(self, year: int, position: int) -> LegalAct:
         commit_message = self._get_commit_message(year, position)
         act_content = self._get_content(year, position)
 
         journal_info, _, act_title, *meta_info = commit_message.splitlines()
         volume = int(journal_info.split()[3])
-        return LegalActDataResult(year, volume, position, act_title, act_content)
+        return LegalAct(year, volume, position, act_title, act_content)
 
     def _get_commit_message(self, year: int, position: int) -> str:
         year_part = f"Dz.U. {year}"
@@ -24,7 +24,7 @@ class LocalGitBackend(Backend):
 
         for commit in self._repo.walk(self._repo.head.target):
             title_line = commit.message.splitlines()[0]
-            if year_part in title_line and pos_part in title_line:
+            if title_line.startswith(year_part) and title_line.endswith(pos_part):
                 return commit.message
 
         raise RuntimeError()
@@ -40,5 +40,5 @@ class LocalGitBackend(Backend):
 
         raise RuntimeError()
 
-    def get_next_legal_act_data(self):
+    def _get_next_legal_act_index(self) -> list[int]:
         ...
