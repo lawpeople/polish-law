@@ -5,15 +5,15 @@ from liblegis.legal_act import LegalAct
 
 
 class Backend(Protocol):
-    _index: list[int] | None = None
+    _cursor: list[int] | None = None
 
     @property
     def index(self) -> list[int] | None:
-        return self._index
+        return self._cursor
 
     def get_legal_act(self, year: int, position: int) -> LegalAct:
         legal_act = self._get_legal_act(year, position)
-        self._index = [year, position]
+        self._cursor = [year, position]
         return legal_act
 
     @abstractmethod
@@ -21,8 +21,8 @@ class Backend(Protocol):
         ...
 
     def get_next_legal_act(self) -> LegalAct | None:
-        self._index = self._get_next_legal_act_index()
-        year, position = self._index
+        self._cursor = self._get_next_legal_act_index()
+        year, position = self._cursor
         return self._get_legal_act(year, position)
 
     @abstractmethod

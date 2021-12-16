@@ -7,7 +7,7 @@ from liblegis.backends.base import Backend, LegalAct
 
 class LocalGitBackend(Backend):
     def __init__(self) -> None:
-        self._index = None
+        self._cursor = None
         self._repo = Repository("data/.git")
 
     def _get_legal_act(self, year: int, position: int) -> LegalAct:
