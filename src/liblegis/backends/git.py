@@ -34,9 +34,10 @@ class Metadata:
 
     def __init__(self, commit: Commit) -> None:
         self._commit = commit
-        self._data = dict(
-            [line.split(": ") for line in commit.message.splitlines()[3:]]
-        )
+        self._data: dict[str, str] = {}
+        for line in commit.message.splitlines()[3:]:
+            field, value = line.split(": ")
+            self._data[field] = value
 
     @property
     def journal_data(self) -> dict[str, int]:
