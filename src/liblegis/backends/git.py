@@ -79,7 +79,7 @@ class LocalGitBackend(Backend):
         self._journal_metadata: dict[tuple[int, int], JournalIndexConfig] = {}
         self._build_journal_index_and_metadata()
 
-    def _build_journal_index_and_metadata(self):
+    def _build_journal_index_and_metadata(self) -> None:
         for commit in self._repo.walk(self._repo.head.target, GIT_SORT_REVERSE):
             metadata = Metadata(commit)
             journal_data = metadata.journal_data
