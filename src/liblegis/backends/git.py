@@ -4,7 +4,8 @@ from typing import TypedDict
 
 from pygit2 import GIT_SORT_REVERSE, Commit, Repository
 
-from liblegis.backends.base import Backend, LegalAct
+from liblegis.backends.base import Backend
+from liblegis.legal_act import LegalAct
 
 
 class JournalIndexConfig(TypedDict):
