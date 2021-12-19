@@ -16,6 +16,13 @@ class Backend(Protocol):
         self._cursor = (year, position)
         return legal_act
 
+    def get_first_legal_act(self) -> LegalAct | None:
+        self._cursor = self._get_first_legal_act_index()
+        if self._cursor is None:
+            return None
+        year, position = self._cursor
+        return self._get_legal_act(year, position)
+
     @abstractmethod
     def _get_legal_act(self, year: int, position: int) -> LegalAct:
         ...
@@ -26,6 +33,10 @@ class Backend(Protocol):
             return None
         year, position = self._cursor
         return self._get_legal_act(year, position)
+
+    @abstractmethod
+    def _get_first_legal_act_index(self) -> tuple[int, int] | None:
+        ...
 
     @abstractmethod
     def _get_next_legal_act_index(self) -> tuple[int, int] | None:

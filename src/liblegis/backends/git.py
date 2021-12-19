@@ -22,16 +22,16 @@ JOURNAL_LINE_PATTERN = re.compile(
     r"Dz.U. (?P<year>(\d{4})) nr (?P<volume>(\d+)) poz. (?P<position>(\d+))"
 )
 
-FIELDS_MAP = {
-    "promulgation_date": "Data ogłoszenia",
-    "announcement_date": "Data wydania",
-    "comes_in_force_date": "Data wejścia w życie",
-    "effective_date": "Data obowiązywania",
-}
-IS_DELETED_FIELDS = {"Akty uchylone", "Akty uznane za uchylone"}
-
 
 class Metadata:
+    _FIELDS_MAP = {
+        "promulgation_date": "Data ogłoszenia",
+        "announcement_date": "Data wydania",
+        "comes_in_force_date": "Data wejścia w życie",
+        "effective_date": "Data obowiązywania",
+    }
+    _IS_DELETED_FIELDS = {"Akty uchylone", "Akty uznane za uchylone"}
+
     def __init__(self, commit: Commit) -> None:
         self._commit = commit
         self._data = dict(
@@ -47,11 +47,11 @@ class Metadata:
         return self._commit.message.splitlines()[2]
 
     def pop_field(self, target: str) -> str | None:
-        return self._data.pop(FIELDS_MAP[target], None)
+        return self._data.pop(self._FIELDS_MAP[target], None)
 
     def get_deleted_journal_entries(self) -> list[tuple[int, int]]:
         journal_entries: list[tuple[int, int]] = []
-        for field in IS_DELETED_FIELDS:
+        for field in self._IS_DELETED_FIELDS:
             value = self._data.pop(field, None)
             if value is None:
                 continue
@@ -138,6 +138,11 @@ class LocalGitBackend(Backend):
                     return f.read()
 
         raise RuntimeError()
+
+    def _get_first_legal_act_index(self) -> tuple[int, int] | None:
+        if not self._journal_index:
+            return None
+        return self._journal_index[0]
 
     def _get_next_legal_act_index(self) -> tuple[int, int] | None:
         if self._cursor is None:
