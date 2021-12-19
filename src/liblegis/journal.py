@@ -15,13 +15,11 @@ class Journal(Iterable[LegalAct]):
         return self
 
     def __next__(self) -> LegalAct:
-        if self._backend.cursor is None:
-            legal_act = self._backend.get_first_legal_act()
-            if legal_act is None:
-                raise StopIteration()
-            return legal_act
-        else:
-            next_legal_act = self._backend.get_next_legal_act()
-            if next_legal_act is None:
-                raise StopIteration()
-            return next_legal_act
+        backend_method = self._backend.get_first_legal_act
+        if self._backend.cursor is not None:
+            backend_method = self._backend.get_next_legal_act
+
+        legal_act = backend_method()
+        if legal_act is None:
+            raise StopIteration()
+        return legal_act
