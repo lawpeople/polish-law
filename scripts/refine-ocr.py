@@ -129,7 +129,7 @@ FIRST_PAGE_STARTS = [
 ]
 
 
-def print_refined_ocr(is_first_page: bool):
+def print_refined_ocr(is_first_page: bool) -> None:
     output_lines: list[str] = []
     # Fix most frequent mistakes in the OCR-ed line
     for line in sys.stdin:
