@@ -6,6 +6,7 @@ authors = ["Piotr Szpetkowski <piotr.szpetkowski@pyquest.space>"]
 license = "MIT"
 packages = [
     { include = "liblegis", from = "src" },
+    { include = "legis_cli", from = "src" },
 ]
 
 [tool.poetry.dependencies]
@@ -17,6 +18,13 @@ pytest = "^7.0.0rc1"
 pre-commit = "^2.16.0"
 black = "^21.12b0"
 ipython = "^7.30.1"
+
+[tool.poetry.scripts]
+legis = "legis_cli.app:main"
+
+[tool.mypy]
+mypy_path = "./typings"
+strict = true
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

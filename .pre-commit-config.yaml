@@ -22,6 +22,3 @@ repos:
     rev: v0.920
     hooks:
       - id: mypy
-        exclude: "tests/"
-        args: ["--strict"]
-        files: .py$
