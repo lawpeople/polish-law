@@ -11,6 +11,10 @@ class GetActCommand(Command, name="get-act"):
         )
 
     def execute(self, backend: Backend, data: argparse.Namespace) -> None:
-        legal_act: str = data.legal_act
-        year, position = [int(v) for v in legal_act.split("/")]
-        print(backend.get_legal_act(year, position).title)
+        legal_act_addr: str = data.legal_act
+        year, position = [int(v) for v in legal_act_addr.split("/")]
+        legal_act = backend.get_legal_act(year, position)
+        print(
+            f"Dz.U. {legal_act.year} nr {legal_act.volume} poz. {legal_act.position}"
+            f"\n\n{legal_act.content}"
+        )
