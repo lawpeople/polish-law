@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import argparse
 
+from liblegis.backends import Backend
+
 COMMAND_REGISTRY: dict[str, type[Command]] = {}
 
 
@@ -15,4 +17,7 @@ class Command:
         COMMAND_REGISTRY[name] = cls
 
     def __init__(self, subparser: argparse.ArgumentParser) -> None:
+        ...
+
+    def execute(self, backend: Backend, data: argparse.Namespace) -> None:
         ...

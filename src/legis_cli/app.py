@@ -15,13 +15,16 @@ class CLIApplication:
         self._register_commands()
 
     def _register_commands(self) -> None:
-        subparsers = self.parser.add_subparsers()
+        subparsers = self.parser.add_subparsers(dest="subparser_name")
         for command_cls in COMMAND_REGISTRY.values():
             subparser = subparsers.add_parser(command_cls.name)
             self._commands[command_cls.name] = command_cls(subparser)
 
     def run(self) -> None:
-        self.parser.parse_args()
+        data = self.parser.parse_args()
+        subparser_name: str = data.subparser_name
+        command = self._commands[subparser_name]
+        command.execute(self.backend, data)
 
 
 def main() -> None:
