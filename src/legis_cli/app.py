@@ -1,6 +1,7 @@
 import argparse
 
 from legis_cli.commands import COMMAND_REGISTRY, Command
+from legis_cli.commands.base import BaseData
 from liblegis.backends import Backend, LocalGitBackend
 
 
@@ -10,7 +11,7 @@ class CLIApplication:
     def __init__(self, backend_cls: type[Backend]) -> None:
         self.backend = backend_cls()
         self.parser = argparse.ArgumentParser(description=self.__doc__)
-        self._commands: dict[str, Command] = {}
+        self._commands: dict[str, Command[BaseData]] = {}
 
         self._register_commands()
 
@@ -21,9 +22,10 @@ class CLIApplication:
             self._commands[command_cls.name] = command_cls(subparser)
 
     def run(self) -> None:
-        data = self.parser.parse_args()
-        subparser_name: str = data.subparser_name
+        parser_data = self.parser.parse_args()
+        subparser_name: str = parser_data.subparser_name
         command = self._commands[subparser_name]
+        data = command.data_cls(**parser_data.__dict__)
         command.execute(self.backend, data)
 
 
