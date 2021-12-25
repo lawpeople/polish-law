@@ -1,4 +1,3 @@
-import argparse
 from dataclasses import dataclass
 
 from legis_cli.commands.base import BaseData, Command
@@ -13,9 +12,6 @@ class GetJournalData(BaseData):
 
 class GetJournalCommand(Command[GetJournalData], name="get-journal"):
     data_cls = GetJournalData
-
-    def __init__(self, subparser: argparse.ArgumentParser) -> None:
-        subparser.add_argument("--title", action="store_true")
 
     def execute(self, backend: Backend, data: GetJournalData) -> None:
         journal = Journal(backend_cls=LocalGitBackend)
