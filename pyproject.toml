@@ -25,6 +25,7 @@ legis = "legis_cli.app:main"
 [tool.mypy]
 mypy_path = "./typings"
 strict = true
+files = "src"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
