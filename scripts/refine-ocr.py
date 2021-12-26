@@ -86,6 +86,7 @@ replacements = {
     "kontrołą": "kontrolą",
     "członkow": "członków",
     "czionków": "członków",
+    "członkówie": "członkowie",
     "rażie": "razie",
     "Rekląmacje": "Reklamacje",
     "mieiscowej": "miejscowej",
@@ -113,7 +114,16 @@ replacements = {
     "wzgiędna": "względna",
     "połeca": "poleca",
     "cełu": "celu",
+    "wogóla": "wogóle",
+    "personeł": "personel",
+    "tyłko": "tylko",
+    "potskich": "polskich",
+    "sprawiedliwaści": "sprawiedliwości",
+    "wykształcemiem": "wykształceniem",
+    "przedstawicieł": "przedstawiciel",
+    "Powiaowy": "Powiatowy",
     "Thuguit": "Thugutt",
+    "Thugult": "Thugutt",
     "lzby": "Izby",
     "dnią": "dnia",
     "$$": "§§",
@@ -126,6 +136,7 @@ FIRST_PAGE_STARTS = [
     "Do Naczelnego Dowódcy Wojsk Polskich",
     "DEKRET",
     "USTAWA TYMCZASOWA",
+    "ROZPORZĄDZENIE",
 ]
 
 
