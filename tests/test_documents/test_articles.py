@@ -117,7 +117,7 @@ def test_spacing_between_emdash(legal_act: str):
         if text_before == "|" and text_after == "|":
             continue
 
-        if text_before.isdigit() and text_after.isdigit():
+        if text_before[-1].isdigit() and text_after[0].isdigit():
             continue
 
         if is_roman_numeric(text_before) and is_roman_numeric(text_after):
