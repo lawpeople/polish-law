@@ -2,6 +2,7 @@ import argparse
 
 from legis_cli.commands import COMMAND_REGISTRY, Command
 from legis_cli.commands.base import BaseData
+from legis_cli.compat import enable_argcomplete_if_available
 from liblegis.backends import Backend, LocalGitBackend
 
 
@@ -14,6 +15,7 @@ class CLIApplication:
         self._commands: dict[str, Command[BaseData]] = {}
 
         self._register_commands()
+        enable_argcomplete_if_available(self.parser)
 
     def _register_commands(self) -> None:
         subparsers = self.parser.add_subparsers(dest="subparser_name")
