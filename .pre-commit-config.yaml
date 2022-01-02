@@ -24,3 +24,5 @@ repos:
       - id: mypy
         args: ["--strict"]
         files: src
+ci:
+  autofix_prs: false
