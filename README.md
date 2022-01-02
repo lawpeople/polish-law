@@ -1,6 +1,7 @@
 # Polish Law
 
 [![CI](https://github.com/lawpeople/polish-law/actions/workflows/ci.yml/badge.svg)](https://github.com/lawpeople/polish-law/actions/workflows/ci.yml)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/lawpeople/polish-law/main.svg)](https://results.pre-commit.ci/latest/github/lawpeople/polish-law/main)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/lawpeople/polish-law/)
 
 Based on data provided by [Journal of Laws](https://dziennikustaw.gov.pl) and [ISAP](https://isap.sejm.gov.pl).
