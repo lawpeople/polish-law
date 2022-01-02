@@ -10,6 +10,7 @@ replacements = {
     "<": "c",
     ". *": ".",
     "'": "",
+    "*/,": "%",
     "l-ym": "1-ym",
     "iub": "lub",
     "urzęlowy": "urzędowy",
@@ -118,12 +119,24 @@ replacements = {
     "personeł": "personel",
     "tyłko": "tylko",
     "potskich": "polskich",
+    "połskich": "polskich",
+    "wołno": "wolno",
+    "sima": "sama",
+    "dałsze": "dalsze",
+    "gininom": "gminom",
+    "naieżna": "należna",
+    "poiera": "pobiera",
+    "wriosek": "wniosek",
+    "przysłaguje": "przysługuje",
     "sprawiedliwaści": "sprawiedliwości",
     "wykształcemiem": "wykształceniem",
     "przedstawicieł": "przedstawiciel",
     "Powiaowy": "Powiatowy",
+    "Rozdzielczęgo": "Rozdzielczego",
+    "Milicjj": "Milicji",
     "Thuguit": "Thugutt",
     "Thugult": "Thugutt",
+    "Pilsudski": "Piłsudski",
     "lzby": "Izby",
     "dnią": "dnia",
     "$$": "§§",
@@ -135,8 +148,9 @@ FIRST_PAGE_STARTS = [
     "Rada Regencyjna do Narodu Polskiego",
     "Do Naczelnego Dowódcy Wojsk Polskich",
     "DEKRET",
-    "USTAWA TYMCZASOWA",
+    "USTAWA",
     "ROZPORZĄDZENIE",
+    "Przepisy",
 ]
 
 
@@ -180,7 +194,7 @@ def print_refined_ocr(is_first_page: bool) -> None:
     output = re.sub(r",{2,}", r",", output)
     output = re.sub(r"([\w,\.]+)\n([\w ]{2,})", r"\1 \2", output)
     output = re.sub(r"Art. (\d)\d ", r"Art. \1. ", output)
-    output = re.sub(r"Art. (\d+)\.+", r"Art. \1.", output)
+    output = re.sub(r"Art. (\d+)[\.,]+", r"Art. \1.", output)
     output = re.sub(r"! ([a-z])", r" \1", output)
     output = re.sub(r"(\d) 1 (\d)", r"\1 i \2", output)
     output = re.sub(r"\n(\d)([\.\)])", r"\n\1\2", output)
