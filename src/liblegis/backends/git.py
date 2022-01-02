@@ -132,12 +132,9 @@ class LocalGitBackend(Backend):
 
     def _get_content(self, year: int, position: int) -> str:
         searched_filename = f"D{year}{position:>04}.md"
-
-        data_path_glob = pathlib.Path("./data").glob("**/*.md")
-        for filepath in data_path_glob:
-            if filepath.name == searched_filename:
-                with open(filepath) as f:
-                    return f.read()
+        for filepath in pathlib.Path("./data").glob(f"**/{searched_filename}"):
+            with open(filepath) as f:
+                return f.read()
 
         raise RuntimeError()
 
