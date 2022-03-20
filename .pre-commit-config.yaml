@@ -1,5 +1,5 @@
 default_language_version:
-  python: python3
+  python: python3.10
 repos:
   - repo: https://github.com/PyCQA/isort
     rev: 5.10.1
@@ -8,7 +8,7 @@ repos:
         args: ["--profile", "black"]
         files: .py$
   - repo: https://github.com/psf/black
-    rev: 21.12b0
+    rev: 22.1.0
     hooks:
       - id: black
         files: .py$
@@ -19,7 +19,7 @@ repos:
         args: ["--max-line-length", "88"]
         files: .py$
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v0.931
+    rev: v0.940
     hooks:
       - id: mypy
         args: ["--strict"]
