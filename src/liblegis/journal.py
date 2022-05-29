@@ -7,9 +7,9 @@ from liblegis.legal_act import LegalAct
 class Journal(Iterable[LegalAct]):
     def __init__(
         self,
-        backend_cls: type[Backend],
+        backend: Backend,
     ) -> None:
-        self._backend = backend_cls()
+        self._backend = backend
 
     def __iter__(self) -> Iterator[LegalAct]:
         return self
