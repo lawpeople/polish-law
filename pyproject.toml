@@ -15,6 +15,7 @@ pygit2 = "^1.9.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"
+pytest-cov = "^3.0.0"
 pre-commit = "^2.19.0"
 black = "^22.3.0"
 ipython = "^8.4.0"
