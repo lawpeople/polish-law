@@ -25,6 +25,7 @@ class MockBackendFixtureRequest:
 
 class MockBackend(Backend):
     def __init__(self, data: MockBackendData) -> None:
+        super().__init__()
         self._indices = sorted(data.keys())
         self._data = data
 

@@ -1,11 +1,13 @@
 from abc import abstractmethod
-from typing import Protocol
 
 from liblegis.legal_act import LegalAct
 
 
-class Backend(Protocol):
-    _cursor: tuple[int, int] | None = None
+class Backend:
+    _cursor: tuple[int, int] | None
+
+    def __init__(self) -> None:
+        self._cursor = None
 
     @property
     def cursor(self) -> tuple[int, int] | None:

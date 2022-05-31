@@ -75,7 +75,7 @@ class Metadata:
 
 class LocalGitBackend(Backend):
     def __init__(self) -> None:
-        self._cursor = None
+        super().__init__()
         self._repo = Repository("data/.git")
         self._journal_index: list[tuple[int, int]] = []
         self._journal_metadata: dict[tuple[int, int], JournalIndexConfig] = {}
