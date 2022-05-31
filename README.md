@@ -38,6 +38,16 @@ In the future I will work on the final goal i.e. R&D project exposing the data t
 
 ## Development
 
+The dev environment can be setup with poetry:
+```sh
+poetry install
+```
+
+After this is done the tests can be run with:
+```sh
+poetry run pytest tests
+```
+
 Pull requests that provide more tests or that enhance the tooling are very welcome.
 
 Community Pull requests to the https://github.com/lawpeople/polish-law-data repository are prohibited.
