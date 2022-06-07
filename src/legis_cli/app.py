@@ -10,7 +10,7 @@ class CLIApplication:
     """CLI Application that exposes an API to work with legal acts."""
 
     def __init__(self, backend_cls: type[Backend]) -> None:
-        self.backend = backend_cls()
+        self.backend_cls = backend_cls
         self.parser = argparse.ArgumentParser(description=self.__doc__)
         self._commands: dict[str, Command[BaseData]] = {}
 
@@ -27,8 +27,10 @@ class CLIApplication:
         parser_data = self.parser.parse_args()
         subparser_name: str = parser_data.subparser_name
         command = self._commands[subparser_name]
+
+        backend = self.backend_cls(parse_content=command.backend_parse_content)
         data = command.data_cls(**parser_data.__dict__)
-        command.execute(self.backend, data)
+        command.execute(backend, data)
 
 
 def main() -> None:

@@ -19,6 +19,7 @@ class BaseData:
 class Command(Generic[TD]):
     name: str
     data_cls: type[TD]
+    backend_parse_content: bool = False
 
     def __init_subclass__(cls, name: str) -> None:
         if name in COMMAND_REGISTRY:
