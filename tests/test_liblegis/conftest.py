@@ -3,7 +3,7 @@ from typing import TypedDict
 import pytest
 
 from liblegis.backends import Backend
-from liblegis.legal_act import LegalAct
+from liblegis.legal_act import LegalAct, LegalArticle
 
 
 class MockBackendDataEntry(TypedDict):
@@ -14,6 +14,7 @@ class MockBackendDataEntry(TypedDict):
     comes_in_force_date: str
     effective_date: str
     content: str
+    articles: list[LegalArticle]
 
 
 MockBackendData = dict[tuple[int, int], MockBackendDataEntry]

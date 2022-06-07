@@ -74,8 +74,8 @@ class Metadata:
 
 
 class LocalGitBackend(Backend):
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, parse_content: bool = False) -> None:
+        super().__init__(parse_content=parse_content)
         self._repo = Repository("data/.git")
         self._journal_index: list[tuple[int, int]] = []
         self._journal_metadata: dict[tuple[int, int], JournalIndexConfig] = {}
@@ -125,6 +125,7 @@ class LocalGitBackend(Backend):
             comes_in_force_date=metadata["comes_in_force_date"],
             effective_date=metadata["effective_date"],
             content=act_content,
+            articles=[],
         )
 
     def _is_deleted(self, index_key: tuple[int, int]) -> bool:

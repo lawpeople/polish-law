@@ -23,6 +23,7 @@ def test_empty_journal(mock_backend: Backend):
                 "comes_in_force_date": "2022-02-16",
                 "effective_date": "2022-02-18",
                 "content": "Foo content",
+                "articles": [],
             }
         }
     ],
